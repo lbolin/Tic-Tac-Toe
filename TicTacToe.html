@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-	<title>McCown's Tic-Tac-Toe</title>
+	<title> Tic-Tac-Toe</title>
 	<meta charset="utf-8">
 	<script>
 	
@@ -16,6 +16,7 @@ function makeMove(e) {
     box.innerHTML = "X";	
     humansTurn = false;
     //computers turn
+	document.getElementById("turnInfo").innerHTML = "Computers Turn";
 	setTimeout(makeComputerMove,1000);
 
     }
@@ -45,18 +46,36 @@ function makeComputerMove() {
         emptyCell.classList.add("o");
 		emptyCell.innerHTML = "O";
         humansTurn = true;
-        //yourturn
+        document.getElementById("turnInfo").innerHTML = "Your Turn";
+		
 	}
 }
+
+
+function newGame()
+		{
+			for(let i = 1; i <=9; i++){
+				let resetCell = document.querySelector("#c" + (emptyCells[move]+1));
+				resetCell.innerHTML == "";
+				resetCell.classList.remove("o")
+				box.classList.remove("x");
+			}
+			document.getElementById("turnInfo").innerHTML = "Your Turn";
+		
+		}
 
 // Called when the DOM finishes loading
 function domLoaded() {
     // Register all event handlers/listeners
 	for (let i = 1; i <= 9; i++) {
 		document.querySelector("#c" + i).addEventListener("click", makeMove);
-      
+		document.querySelector("#newGameBtn").addEventListener("Click",newGame);
+		
 	}
+	
 }
+
+
 
 // Call start after DOM finishes loading
 window.addEventListener("DOMContentLoaded", domLoaded);
@@ -115,7 +134,7 @@ window.addEventListener("DOMContentLoaded", domLoaded);
 </div>
 
 <p id="turnInfo">
-TURN INFO
+YOUR TURN
 </p>
 
 <p>

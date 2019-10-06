@@ -1,0 +1,11 @@
+
+function newGame()
+		{
+			for(let i = 1; i <=9; i++){
+				emptyCell.innerHTML == "";
+				emptyCall.classList.remove("o")
+				box.classList.remove("x");
+			}
+		}
+
+        //button.querySelector("#newGameBtn").addEventListener("click", newGame);
