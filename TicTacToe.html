@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>McCown's Tic-Tac-Toe</title>
+	<meta charset="utf-8">
+	<script>
+	
+let humansTurn = true;
+	
+// Called when the user clicks on a box in the game board
+function makeMove(e) {
+	let box = e.target;  
+    box.classList.add("x")  // e.target is the box that was clicked on
+	if(box.innerHTML == "" && humansTurn)
+    {
+    box.innerHTML = "X";	
+    humansTurn = false;
+    //computers turn
+	setTimeout(makeComputerMove,1000);
+
+    }
+}
+
+// Put an O at a randomly selected location
+function makeComputerMove() {
+
+	// Find all blank cells
+	let emptyCells = [];
+	let cells = document.querySelectorAll("#board div");
+	for (let i = 0; i < cells.length; i++) {
+		if (cells[i].innerHTML === "") {
+			emptyCells.push(i);
+		}
+	}
+	
+	if (emptyCells.length === 0) {
+		alert("Computer can't find an available move.");
+	}
+	else {
+		// Get a random number between 0 and emptyCells.length
+		let move = Math.floor(Math.random() * emptyCells.length);
+
+		// Put O in randomly selected cell
+		let emptyCell = document.querySelector("#c" + (emptyCells[move] + 1));
+        emptyCell.classList.add("o");
+		emptyCell.innerHTML = "O";
+        humansTurn = true;
+        //yourturn
+	}
+}
+
+// Called when the DOM finishes loading
+function domLoaded() {
+    // Register all event handlers/listeners
+	for (let i = 1; i <= 9; i++) {
+		document.querySelector("#c" + i).addEventListener("click", makeMove);
+      
+	}
+}
+
+// Call start after DOM finishes loading
+window.addEventListener("DOMContentLoaded", domLoaded);
+
+	</script>
+	
+	<style>
+	
+	body {
+		font-family: arial, sans-serif;
+	}
+	
+	#board {
+		font-size: 85px; 	
+		display: grid;
+		grid-template-columns: 100px 100px 100px;
+		grid-template-rows: 100px 100px 100px;
+		grid-gap: 10px;
+	}
+	
+	#board > div {
+		border: 1px solid LightSkyBlue;
+		text-align: center;
+	}
+	
+	#board > div:hover {
+		border-color: blue;
+	}	
+		
+	.x {
+		color: red;
+	}
+	
+	.o {
+		color: blue;
+	}
+	
+	</style>
+
+</head>
+
+<body>
+
+<h1>Tic-Tac-Toe</h1>
+
+<div id="board">
+	<div id="c1"></div>
+	<div id="c2"></div>
+	<div id="c3"></div>
+	<div id="c4"></div>
+	<div id="c5"></div>
+	<div id="c6"></div>
+	<div id="c7"></div>
+	<div id="c8"></div>
+	<div id="c9"></div>
+</div>
+
+<p id="turnInfo">
+TURN INFO
+</p>
+
+<p>
+<input type="button" value="New Game" id="newGameBtn">
+</p>
+
+</body>
+</html>
