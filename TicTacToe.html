@@ -1,145 +1,221 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-	<title> Tic-Tac-Toe</title>
-	<meta charset="utf-8">
-	<script>
-	
-let humansTurn = true;
-	
-// Called when the user clicks on a box in the game board
-function makeMove(e) {
-	let box = e.target;  
-    box.classList.add("x")  // e.target is the box that was clicked on
-	if(box.innerHTML == "" && humansTurn)
-    {
-    box.innerHTML = "X";	
-    humansTurn = false;
-    //computers turn
-	document.getElementById("turnInfo").innerHTML = "Computers Turn";
-	setTimeout(makeComputerMove,1000);
 
-    }
-}
+    <title>Tic-Tac-Toe</title>
 
-// Put an O at a randomly selected location
-function makeComputerMove() {
+    <meta charset="utf-8" />
 
-	// Find all blank cells
-	let emptyCells = [];
-	let cells = document.querySelectorAll("#board div");
-	for (let i = 0; i < cells.length; i++) {
-		if (cells[i].innerHTML === "") {
-			emptyCells.push(i);
-		}
-	}
-	
-	if (emptyCells.length === 0) {
-		alert("Computer can't find an available move.");
-	}
-	else {
-		// Get a random number between 0 and emptyCells.length
-		let move = Math.floor(Math.random() * emptyCells.length);
+    <script>
 
-		// Put O in randomly selected cell
-		let emptyCell = document.querySelector("#c" + (emptyCells[move] + 1));
-        emptyCell.classList.add("o");
-		emptyCell.innerHTML = "O";
-        humansTurn = true;
-        document.getElementById("turnInfo").innerHTML = "Your Turn";
-		
-	}
-}
+        let humansTurn = true;
 
+        // Called when the user clicks on a box in the game board
 
-function newGame()
-		{
-			for(let i = 1; i <=9; i++){
-				let resetCell = document.querySelector("#c" + (emptyCells[move]+1));
-				resetCell.innerHTML == "";
-				resetCell.classList.remove("o")
-				box.classList.remove("x");
-			}
-			document.getElementById("turnInfo").innerHTML = "Your Turn";
-		
-		}
+        function makeMove(e) {
 
-// Called when the DOM finishes loading
-function domLoaded() {
-    // Register all event handlers/listeners
-	for (let i = 1; i <= 9; i++) {
-		document.querySelector("#c" + i).addEventListener("click", makeMove);
-		document.querySelector("#newGameBtn").addEventListener("Click",newGame);
-		
-	}
-	
-}
+            let box = e.target;
 
+            box.classList.add("x"); // e.target is the box that was clicked on
 
+            if (box.innerHTML == "" && humansTurn) {
 
-// Call start after DOM finishes loading
-window.addEventListener("DOMContentLoaded", domLoaded);
+                box.innerHTML = "X";
 
-	</script>
-	
-	<style>
-	
-	body {
-		font-family: arial, sans-serif;
-	}
-	
-	#board {
-		font-size: 85px; 	
-		display: grid;
-		grid-template-columns: 100px 100px 100px;
-		grid-template-rows: 100px 100px 100px;
-		grid-gap: 10px;
-	}
-	
-	#board > div {
-		border: 1px solid LightSkyBlue;
-		text-align: center;
-	}
-	
-	#board > div:hover {
-		border-color: blue;
-	}	
-		
-	.x {
-		color: red;
-	}
-	
-	.o {
-		color: blue;
-	}
-	
-	</style>
+                humansTurn = false;
+
+                //computers turn
+
+                document.getElementById("turnInfo").innerHTML = "Computers Turn";
+
+                setTimeout(makeComputerMove, 1000);
+
+            }
+
+        }
+
+        // Put an O at a randomly selected location
+
+        function makeComputerMove() {
+
+            // Find all blank cells
+
+            let emptyCells = [];
+
+            let cells = document.querySelectorAll("#board div");
+
+            for (let i = 0; i < cells.length; i++) {
+
+                if (cells[i].innerHTML === "") {
+
+                    emptyCells.push(i);
+
+                }
+
+            }
+
+            if (emptyCells.length === 0) {
+
+                alert("Computer can't find an available move.");
+
+            } else {
+
+                // Get a random number between 0 and emptyCells.length
+
+                let move = Math.floor(Math.random() * emptyCells.length);
+
+                // Put O in randomly selected cell
+
+                let emptyCell = document.querySelector("#c" + (emptyCells[move] + 1));
+
+                emptyCell.classList.add("o");
+
+                emptyCell.innerHTML = "O";
+
+                humansTurn = true;
+
+                document.getElementById("turnInfo").innerHTML = "Your Turn";
+
+            }
+
+        }
+
+        function newGame() {
+
+            for (let i = 1; i <= 9; i++) {
+
+                let resetCell = document.querySelector("#c" + i);
+
+                resetCell.innerHTML = "";
+
+                resetCell.classList.remove("o");
+
+                resetCell.classList.remove("x");
+
+            }
+
+            humansTurn=true;
+
+            document.getElementById("turnInfo").innerHTML = "Your Turn";
+
+        }
+
+        // Called when the DOM finishes loading
+
+        function domLoaded() {
+
+            // Register all event handlers/listeners
+
+            for (let i = 1; i <= 9; i++) {
+
+                document.querySelector("#c" + i).addEventListener("click", makeMove);
+
+            }
+
+            let newBtn = document.querySelector("#newGameBtn");
+
+            newBtn.addEventListener("click", newGame);
+
+        }
+
+        // Call start after DOM finishes loading
+
+        window.addEventListener("DOMContentLoaded", domLoaded);
+
+    </script>
+
+    <style>
+
+        body {
+
+            font-family: arial, sans-serif;
+
+        }
+
+        #board {
+
+            font-size: 85px;
+
+            display: grid;
+
+            grid-template-columns: 100px 100px 100px;
+
+            grid-template-rows: 100px 100px 100px;
+
+            grid-gap: 10px;
+
+        }
+
+        #board>div {
+
+            border: 1px solid LightSkyBlue;
+
+            text-align: center;
+
+        }
+
+        #board>div:hover {
+
+            border-color: blue;
+
+        }
+
+        .x {
+
+            color: red;
+
+        }
+
+        .o {
+
+            color: blue;
+
+        }
+
+    </style>
 
 </head>
 
 <body>
 
-<h1>Tic-Tac-Toe</h1>
+    <h1>Tic-Tac-Toe</h1>
 
-<div id="board">
-	<div id="c1"></div>
-	<div id="c2"></div>
-	<div id="c3"></div>
-	<div id="c4"></div>
-	<div id="c5"></div>
-	<div id="c6"></div>
-	<div id="c7"></div>
-	<div id="c8"></div>
-	<div id="c9"></div>
-</div>
+    <div id="board">
 
-<p id="turnInfo">
-YOUR TURN
-</p>
+        <div id="c1"></div>
 
-<p>
-<input type="button" value="New Game" id="newGameBtn">
-</p>
+        <div id="c2"></div>
+
+        <div id="c3"></div>
+
+        <div id="c4"></div>
+
+        <div id="c5"></div>
+
+        <div id="c6"></div>
+
+        <div id="c7"></div>
+
+        <div id="c8"></div>
+
+        <div id="c9"></div>
+
+    </div>
+
+    <p id="turnInfo">
+
+        YOUR TURN
+
+    </p>
+
+    <p>
+
+        <input type="button" value="New Game" id="newGameBtn" />
+
+    </p>
 
 </body>
+
 </html>
